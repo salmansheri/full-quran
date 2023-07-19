@@ -9,7 +9,7 @@ import {
 
 interface UserAvatarProps {
   username: string;
-  src: string; 
+  src: string;
 }
 
 const UserAvatar: React.FC<UserAvatarProps> = ({ username, src }) => {

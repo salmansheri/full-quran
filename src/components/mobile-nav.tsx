@@ -21,7 +21,7 @@ interface MobileNavProps {
   currentUser: Session | null;
 }
 
-const MobileNav: React.FC<MobileNavProps> = ({ currentUser:session }) => {
+const MobileNav: React.FC<MobileNavProps> = ({ currentUser: session }) => {
   const pathname = usePathname();
   const routes = [
     {
@@ -52,7 +52,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ currentUser:session }) => {
                   "w-full py-3 px-2 rounded-md",
                   route.active
                     ? "bg-black/10 dark:bg-white/10"
-                    : "bg-transparent hover:bg-black/10"
+                    : "bg-transparent hover:bg-black/10",
                 )}
                 key={route.id}
               >
@@ -64,14 +64,17 @@ const MobileNav: React.FC<MobileNavProps> = ({ currentUser:session }) => {
             <div className="flex flex-row items-center justify-between">
               {/* Profile  */}
               {session?.user?.email ? (
-                <UserAvatar username="salman sheriff" src={session.user?.image!} />
+                <UserAvatar
+                  username="salman sheriff"
+                  src={session.user?.image!}
+                />
               ) : (
                 <Link
                   href="/sign-up"
                   className={cn(
                     buttonVariants({
                       variant: "default",
-                    })
+                    }),
                   )}
                 >
                   Sign up

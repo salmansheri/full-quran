@@ -7,16 +7,13 @@ import UserAvatar from "./ui/user-avatar";
 import { Button, buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "./ui/mode-toggle";
-import { Session } from 'next-auth'; 
+import { Session } from "next-auth";
 
 interface MainNavProps {
-  currentUser: Session | null; 
+  currentUser: Session | null;
 }
 
-const MainNav: React.FC<MainNavProps> = ({
-  currentUser: session
-}) => {
- 
+const MainNav: React.FC<MainNavProps> = ({ currentUser: session }) => {
   const pathname = usePathname();
   const routes = [
     {
@@ -40,7 +37,7 @@ const MainNav: React.FC<MainNavProps> = ({
       ))}
 
       {session?.user?.email ? (
-        <UserAvatar src={session?.user?.image!}  username="salman sheriff" />
+        <UserAvatar src={session?.user?.image!} username="salman sheriff" />
       ) : (
         <Link
           href="/sign-up"

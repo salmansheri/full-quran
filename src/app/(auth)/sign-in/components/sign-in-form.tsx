@@ -1,6 +1,12 @@
 "use client";
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -21,7 +27,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 const SigninForm = () => {
-    const [isLoading, setIsLoading] = useState<boolean>(false); 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const form = useForm<SigninType>({
     resolver: zodResolver(SigninSchema),
     defaultValues: {
@@ -31,14 +37,13 @@ const SigninForm = () => {
   });
 
   const onSubmit = (data: SigninType) => {
-    setIsLoading(true); 
+    setIsLoading(true);
 
     signIn("credentials", {
-        ...data
-    })
+      ...data,
+    });
 
-    setIsLoading(false); 
-    
+    setIsLoading(false);
   };
   return (
     <div className="container">
@@ -80,18 +85,23 @@ const SigninForm = () => {
               />
               <Button className="my-5 w-full md:w-fit">
                 {isLoading ? "Loading..." : "Sign in"}
-                </Button>
+              </Button>
             </form>
           </Form>
         </CardContent>
         <Separator className="my-2" />
         <CardFooter className="max-w-xs mx-auto">
-            New to Full Quran?{" "} <Link className={cn(buttonVariants({
-                variant: "link"
-            }))} href="/sign-up">
-                Sign up
-            </Link>
-            
+          New to Full Quran?{" "}
+          <Link
+            className={cn(
+              buttonVariants({
+                variant: "link",
+              }),
+            )}
+            href="/sign-up"
+          >
+            Sign up
+          </Link>
         </CardFooter>
       </Card>
     </div>

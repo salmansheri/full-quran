@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
 
         const isCorrectPassword = await bcrypt.compare(
           credentials.password,
-          user.hashedPassword
+          user.hashedPassword,
         );
 
         if (!isCorrectPassword) {
@@ -45,35 +45,28 @@ export const authOptions: NextAuthOptions = {
       return baseUrl;
     },
     async session({ session, token }) {
-      if(token) {
-        session!.user!.name = token.name; 
-        session!.user!.email = token.email; 
-        session!.user!.image = token.picture
+      if (token) {
+        session!.user!.name = token.name;
+        session!.user!.email = token.email;
+        session!.user!.image = token.picture;
       }
 
-     
-
-      return session; 
+      return session;
     },
-    async jwt({token}) {
+    async jwt({ token }) {
       const existingUser = await prisma.user.findUnique({
         where: {
-          email: token.email as string, 
-        }
-      }); 
-
-      
+          email: token.email as string,
+        },
+      });
 
       return {
-        id: existingUser?.id, 
-        name: existingUser?.name, 
-        email: existingUser?.email, 
-        picture: existingUser?.imageUrl, 
-      }
-
-
-
-    }, 
+        id: existingUser?.id,
+        name: existingUser?.name,
+        email: existingUser?.email,
+        picture: existingUser?.imageUrl,
+      };
+    },
     async signIn({ user, account, credentials, email, profile }) {
       if (user) {
         return true;

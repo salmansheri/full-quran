@@ -9,15 +9,16 @@ import {
 
 interface UserAvatarProps {
   username: string;
+  src: string; 
 }
 
-const UserAvatar: React.FC<UserAvatarProps> = ({ username }) => {
+const UserAvatar: React.FC<UserAvatarProps> = ({ username, src }) => {
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Avatar className="cursor-pointer">
-            <AvatarImage src="" />
+            <AvatarImage src={src} />
             <AvatarFallback className="text-3xl font-bold uppercase">
               {username[0]}
             </AvatarFallback>

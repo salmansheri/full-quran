@@ -15,6 +15,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import ImageUpload from "@/components/ui/image-upload";
 import { Input } from "@/components/ui/input";
@@ -25,11 +26,11 @@ import { SignupSchema, SignupType } from "@/lib/validators/sign-up-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
-import { Loader, Loader2 } from "lucide-react";
+import {  Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 const SignUpForm = () => {
   const router = useRouter();
@@ -44,7 +45,7 @@ const SignUpForm = () => {
     },
   });
 
-  const onUploadImage = (event: React.ChangeEvent<HTMLInputElement>) => {};
+  // const onUploadImage = (event: React.ChangeEvent<HTMLInputElement>) => {};
 
   const { mutate: onRegister, isLoading: isRegistering } = useMutation({
     mutationFn: async ({ email, name, password, imageUrl }: SignupType) => {
@@ -95,7 +96,7 @@ const SignUpForm = () => {
     },
   });
 
-  const onSubmit = (data: SignupType) => {
+  const onSubmit: SubmitHandler<SignupType> = (data: SignupType) => {
     const payload: SignupType = {
       name: data.name,
       email: data.email,
@@ -128,6 +129,7 @@ const SignUpForm = () => {
                       <FormDescription>
                         This is Your Public display Name
                       </FormDescription>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -145,6 +147,7 @@ const SignUpForm = () => {
                         <Input {...field} placeholder="Enter the Email" />
                       </FormControl>
                       <FormDescription>This is Your Email</FormDescription>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -158,6 +161,7 @@ const SignUpForm = () => {
                         <Input {...field} placeholder="Enter the Name" />
                       </FormControl>
                       <FormDescription>This is Your Password</FormDescription>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -175,10 +179,11 @@ const SignUpForm = () => {
                         />
                       </FormControl>
                       <FormDescription>This is Your Imge</FormDescription>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="my-3">
+                <Button type="submit" className="my-3 w-full md:w-fit">
                   {isRegistering ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -199,7 +204,7 @@ const SignUpForm = () => {
               className={cn(
                 buttonVariants({
                   variant: "link",
-                }),
+                })
               )}
             >
               Sign in

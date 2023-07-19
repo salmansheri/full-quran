@@ -6,6 +6,7 @@ import Header from "@/components/header";
 import ThemeProvider from "@/provider/theme-provider";
 import QueryProvider from "@/provider/query-provider";
 import { Toaster } from "@/components/ui/toaster";
+import SessionProvider from "@/provider/session-provider";
 
 const font = Nunito({ subsets: ["latin"] });
 
@@ -22,13 +23,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn(font.className)}>
       <body>
-        <QueryProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Header />
-            {children}
-          </ThemeProvider>
-          <Toaster />
-        </QueryProvider>
+        <SessionProvider>
+          <QueryProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <Header />
+              {children}
+            </ThemeProvider>
+            <Toaster />
+          </QueryProvider>
+        </SessionProvider>
       </body>
     </html>
   );
